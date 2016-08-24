@@ -77,6 +77,15 @@ Additionally, Bootstrap also includes an `.m-x-auto` class for horizontally cent
 </div>
 {% endhighlight %}
 
+### Responsive spacing
+You can also specify to differentiate spacing on between various devices by adding the size you want at the end of the spacing.
+
+{% highlight html %}
+<div class="m-y-2-xs m-y-3-sm">
+  This will now be spaced differently on mobile devices but larger for everything else.
+</div>
+{% endhighlight %}
+
 ## Text alignment
 
 Easily realign text to components with text alignment classes.

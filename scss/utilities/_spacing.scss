@@ -1,55 +1,15 @@
-@mixin spacing-utility($screens-size) {
-  // Width
+//
+// Spacing
+//
 
-  .w-100#{$screens-size} { width: 100% !important; }
-
-  // Margin and Padding
-
-  .m-x-auto#{$screens-size} {
-    margin-right: auto !important;
-    margin-left:  auto !important;
-  }
-
-  @each $prop, $abbrev in (margin: m, padding: p) {
-    @each $size, $lengths in $spacers {
-      $length-x:   map-get($lengths, x);
-      $length-y:   map-get($lengths, y);
-
-      .#{$abbrev}-a-#{$size}#{$screens-size} { #{$prop}:        $length-y $length-x !important; } // a = All sides
-      .#{$abbrev}-t-#{$size}#{$screens-size} { #{$prop}-top:    $length-y !important; }
-      .#{$abbrev}-r-#{$size}#{$screens-size} { #{$prop}-right:  $length-x !important; }
-      .#{$abbrev}-b-#{$size}#{$screens-size} { #{$prop}-bottom: $length-y !important; }
-      .#{$abbrev}-l-#{$size}#{$screens-size} { #{$prop}-left:   $length-x !important; }
-
-      // Axes
-      .#{$abbrev}-x-#{$size}#{$screens-size} {
-        #{$prop}-right:  $length-x !important;
-        #{$prop}-left:   $length-x !important;
-      }
-      .#{$abbrev}-y-#{$size}#{$screens-size} {
-        #{$prop}-top:    $length-y !important;
-        #{$prop}-bottom: $length-y !important;
-      }
-    }
-  }
-
-  // Positioning
-
-  .pos-f-t#{$screens-size} {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: $zindex-navbar-fixed;
-  }
-}
+// Default spacing
 
 @include spacing-utility('');
-@include spacing-utility('-xs');
-@each $grid in ('sm': $screen-sm-min, 'md': $screen-md-min, 'lg': $screen-lg-min) {
-  $grid-key: nth($grid, 1);
-  $grid-value: nth($grid, 2);
-  @media (min-width: $grid-value) {
-    @include spacing-utility('-#{$grid-key}');
+
+// Responsive spacing
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    @include spacing-utility("-#{$breakpoint}");
   }
 }
